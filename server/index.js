@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: [""],
+    origin: ["https://chat-app-frontend-neon-ten.vercel.app/login"],
     methods: ["POST", "GET"],
     credentials: true,
   })
