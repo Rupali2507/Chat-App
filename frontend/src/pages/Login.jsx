@@ -44,6 +44,12 @@ function Login() {
         localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         navigate("/");
       }
+
+      event.preventDefault();
+      axios
+        .post("https://chat-ixpnfh8tp-rupali2507s-projects.vercel.app/")
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
     }
   };
   const handleValidation = () => {

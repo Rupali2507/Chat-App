@@ -17,6 +17,7 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     async function checkAndSetUser() {
       if (!localStorage.getItem("chat-app-user")) {
