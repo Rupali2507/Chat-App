@@ -1,12 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-
+const mongoose = require("mongoose");
 const userRoutes = require("./Routes/userRoutes");
 const messageRoutes = require("./Routes/MsgRoutes");
 
 const socket = require("socket.io");
 
-const { connectToMongoDB } = require("./connection");
+// const { connectToMongoDB } = require("./connection");
 
 const app = express();
 require("dotenv").config();
@@ -28,12 +28,17 @@ app.get("/", (req, res) => {
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-connectToMongoDB(process.env.MONGO_URL)
-  .then(() => {
-    console.log("Database connected succesfully...");
+const uri = process.env.MONGO_URL; // Ensure this matches your environment variable
+if (!uri) {
+  throw new Error("MongoDB URI is not defined in the environment variables.");
+}
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((err) => {
-    console.log(err.message);
+  .then(() => {
+    console.log("Connected to MongoDB");
   });
 
 const server = app.listen(process.env.PORT, () => {
