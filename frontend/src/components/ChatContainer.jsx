@@ -86,8 +86,10 @@ function ChatContainer({ currentChat, currentUser, socket }) {
                         message.fromSelf ? "sended" : "received"
                       }`}
                     >
-                      <div className="content">
-                        <p>{message.message}</p>
+                      <div className="sp">
+                        <div className="content">
+                          <p>{message.message}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -135,6 +137,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
+    border: 2px solid black;
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
@@ -143,18 +146,25 @@ const Container = styled.div`
         border-radius: 1rem;
       }
     }
-    .message {
-      display: flex;
-      align-items: center;
-      .content {
-        max-width: 40%;
-        overflow-wrap: break-word;
-        padding: 1rem;
-        font-size: 1.1rem;
-        border-radius: 1rem;
-        color: #d1d1d1;
-      }
+
+    .content {
+      max-width: 40%;
+      overflow-wrap: break-word;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border-radius: 1rem;
+      color: #d1d1d1;
+      border: 2px solid black;
     }
+    .sp {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .content {
+      background-color: #4f04ff21;
+    }
+
     .sended {
       justify-content: flex-end;
       .content {
