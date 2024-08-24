@@ -3,10 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./Routes/userRoutes");
 const messageRoutes = require("./Routes/MsgRoutes");
-
+const path = require("path");
 const socket = require("socket.io");
-
-// const { connectToMongoDB } = require("./connection");
 
 const app = express();
 require("dotenv").config();
@@ -16,7 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.json("Hello");
+  app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
